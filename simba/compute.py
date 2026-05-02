@@ -99,6 +99,28 @@ def compute_sea_ice_mass_budget(
         "history": history_str
     })
 
+    # --> Total Sea Ice Area (siconc in %) <-- #
+    if "siconc" in ds:
+        siarea_total = _compute_area_sum(ds=ds, var="siconc") / 1.0e8 
+        ds_simba["siarea_total"] = siarea_total
+
+        ds_simba["siarea_total"].attrs = ds["siconc"].attrs.copy()
+        for key in ["cell_measures", "_FillValue", "coordinates", "original_name"]:
+            ds_simba["siarea_total"].attrs.pop(key, None)
+
+        ds_simba["siarea_total"].attrs.update(
+            {
+                "units": "km2",
+                "long_name": "Total Sea-Ice Area Over Masked Region",
+                "cell_methods": f"area: sum where {mask_name} time: mean",
+                "comment": (
+                    "Total sea ice concentration multiplied by grid-cell area over "
+                    "the masked region, converted from m2 to km2."
+                ),
+                "history": history_str,
+            }
+        )
+
     # --> Total Sea Ice Mass Change by Component <-- #
     var_list = [var for var in ds.data_vars if var.startswith("sidmass")]
     for var in var_list:
