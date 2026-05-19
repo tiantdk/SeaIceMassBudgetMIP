@@ -9,7 +9,7 @@ Created By: Ollie Tooth (oliver.tooth@noc.ac.uk)
 # -- Import dependencies -- #
 import tomllib
 from pathlib import Path
-from typing import Literal
+from typing import Literal, Optional
 
 import cftime
 import numpy as np
@@ -23,8 +23,8 @@ class InputVariable(BaseModel):
     SIMBA Input Variable Configuration Model.
     """
     # Define variable name & filepath for each SIMBA input variable:
-    name : str
-    filepath : str
+    name: str
+    filepath: str
 
 
 class InputConfig(BaseModel):
@@ -32,24 +32,26 @@ class InputConfig(BaseModel):
     SIMBA Input Configuration Model.
     """
     # Define dimensions of all SIMBA input variables:
-    dimensions : dict[str, str] = Field(default_factory=dict)
+    dimensions: dict[str, str] = Field(default_factory=dict)
 
     # Define data directory for SIMBA input files:
-    data_dir : str | None = None
+    data_dir: str | None = None
 
     # Define sub-models for all SIMBA input variables:
     mask: InputVariable
     areacello: InputVariable
-    simass: InputVariable
-    sidmassth: InputVariable
-    sidmassdyn: InputVariable
-    sidmassgrowthwat: InputVariable
-    sidmassgrowthbot: InputVariable
-    sidmasssi: InputVariable
-    sidmassevapsubl: InputVariable
-    sidmassmelttop: InputVariable
-    sidmassmeltbot: InputVariable
-    sidmasslat: InputVariable
+    siconc: InputVariable | None = None
+    sivol: InputVariable | None = None
+    simass: InputVariable | None = None
+    sidmassth: InputVariable | None = None
+    sidmassdyn: InputVariable | None = None
+    sidmassgrowthwat: InputVariable | None = None
+    sidmassgrowthbot: InputVariable | None = None
+    sidmasssi: InputVariable | None = None
+    sidmassevapsubl: InputVariable | None = None
+    sidmassmelttop: InputVariable | None = None
+    sidmassmeltbot: InputVariable | None = None
+    sidmasslat: InputVariable | None = None
 
 
 class OutputConfig(BaseModel):
@@ -57,9 +59,9 @@ class OutputConfig(BaseModel):
     SIMBA Output Configuration Model.
     """
     # Define SIMBA output file:
-    output_dir : str
-    output_name : str
-    date_format : Literal["Y", "M", "D"]
+    output_dir: str
+    output_name: str
+    date_format: Literal["Y", "M", "D"]
 
 
 class AppConfig(BaseModel):
@@ -81,7 +83,7 @@ def load_config(args: dict) -> dict:
     -----------
     args : dict
         Command line arguments.
-    
+
     Returns:
     --------
     dict
@@ -95,7 +97,9 @@ def load_config(args: dict) -> dict:
     # Parse and validate config data using Pydantic models:
     config = AppConfig(**data)
     # Convert config params to dict:
-    d_config = config.model_dump(mode="json")
+    d_config = config.model_dump(mode="json",
+                                 exclude_none=True
+                                )
 
     return d_config
 
@@ -105,7 +109,7 @@ def get_output_filename(
     output_dir: str,
     output_name: str,
     date_format: str
-    ) -> str:
+     ) -> str:
     """
     Define SIMBA output filename.
 
