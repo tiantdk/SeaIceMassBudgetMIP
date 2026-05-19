@@ -19,7 +19,7 @@ def _compute_area_sum(
         var: str,
     ) -> xr.DataArray:
     """
-    Compute masked sum of the produce of a variable and horizontal grid cell area
+    Compute masked sum of the product of a variable and horizontal grid cell area
     (`areacello`).
 
     Horizontal dimensions are assumed to be named 'i' and 'j'
@@ -45,11 +45,18 @@ def _compute_area_sum(
         raise TypeError("variable name must be a string.")
     if var not in ds:
         raise ValueError(f"variable '{var}' not found in input dataset.")
-    
+
+    # -- Determine Sea Ice Concentration Units -- #
+    if var == "siconc":
+        if ds[var].max() > 1:
+            # Transform Sea Ice Concentration [0-100%] -> [0-1]:
+            ds[var] = ds[var] / 100
+
     # -- Compute Masked Area-Weighted Sum -- #
     da = (ds[var] * ds["areacello"]).where(ds["mask"]).sum(dim=["i", "j"], skipna=True)
 
     return da
+
 
 def compute_sea_ice_mass_budget(
         ds: xr.Dataset,
@@ -73,7 +80,7 @@ def compute_sea_ice_mass_budget(
     # -- Valid Inputs -- #
     if not isinstance(ds, xr.Dataset):
         raise TypeError("input dataset must be an xarray Dataset.")
-    
+
     # === Compute Sea Ice Mass Budget == #
     # --> Total Sea Ice Mass <-- #
     simass_total = _compute_area_sum(ds=ds, var="simass")
@@ -98,6 +105,44 @@ def compute_sea_ice_mass_budget(
         "comment": "Total sea ice mass multiplied by grid-cell area over the masked region.",
         "history": history_str
     })
+
+    # --> Total Sea Ice Area <-- #
+    if "siconc" in ds.data_vars:
+        # Compute masked area-weighted sum of sea ice concentration [m2 -> km2]:
+        ds_simba["siarea_total"] = _compute_area_sum(ds=ds, var="siconc") / 1E6
+
+        # Add CF-compliant attributes:
+        ds_simba["siarea_total"].attrs = ds["siconc"].attrs.copy()
+        # Drop legacy attributes:
+        for key in ["cell_measures", "_FillValue", "coordinates", "original_name"]:
+            ds_simba["siarea_total"].attrs.pop(key, None)
+        # Update CF attributes:
+        ds_simba["siarea_total"].attrs.update({
+            "units": "km2",
+            "long_name": "Total Sea-Ice Area Over Masked Region",
+            "cell_methods": f"area: sum where {mask_name} time: mean",
+            "comment": "Total sea ice concentration multiplied by grid-cell area over the masked region.",
+            "history": history_str
+        })
+
+    # --> Total Sea Ice Volume <-- #
+    if "sivol" in ds.data_vars:
+        # Compute masked area-weighted sum of sea ice thickness [m3]:
+        ds_simba["sivol_total"] = _compute_area_sum(ds=ds, var="sivol")
+
+        # Add CF-compliant attributes:
+        ds_simba["sivol_total"].attrs = ds["sivol"].attrs.copy()
+        # Drop legacy attributes:
+        for key in ["cell_measures", "_FillValue", "coordinates", "original_name"]:
+            ds_simba["sivol_total"].attrs.pop(key, None)
+        # Update CF attributes:
+        ds_simba["sivol_total"].attrs.update({
+            "units": "m3",
+            "long_name": "Total Sea-Ice Volume Within Masked Region",
+            "cell_methods": f"area: sum where {mask_name} time: mean",
+            "comment": "Total sea ice volume (thickness) multiplied by grid-cell area over the masked region.",
+            "history": history_str
+        })
 
     # --> Total Sea Ice Mass Change by Component <-- #
     var_list = [var for var in ds.data_vars if var.startswith("sidmass")]

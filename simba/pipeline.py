@@ -301,7 +301,7 @@ def run_simba_pipeline(
 
     # Write Sea Ice Mass Budget Analysis output dataset to file:
     output_filepath = save_simba_diagnostics(
-        ds_out=ds_diag,
+        ds_out=ds_diag.squeeze(),
         output_dir=config['outputs']['output_dir'],
         output_name=config['outputs']['output_name'],
         date_format=config['outputs']['date_format']
