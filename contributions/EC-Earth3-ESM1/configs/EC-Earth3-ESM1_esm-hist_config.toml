@@ -12,13 +12,23 @@ data_dir = "/g100_work/optim_IAC/research/noc/otooth/OptimESM/data/EC-Earth3-ESM
 
     [inputs.mask]
     # === Define variable name & filepath of regional mask to perform sea ice mass budget === #
-    name = "mask_SH"
+    name = "mask_NH"
     filepath = "/g100_work/optim_IAC/research/noc/otooth/OptimESM/data/EC-Earth3-ESM-1/Ofx/hemisphere_masks_Ofx_EC-Earth3-ESM-1.nc"
 
     [inputs.areacello]
     # === Define variable name & filepath of horizontal grid cell area (areacello) === #
     name = "areacello"
     filepath = "/g100_work/optim_IAC/research/noc/otooth/OptimESM/data/EC-Earth3-ESM-1/Ofx/areacello_OPfx_EC-Earth3-ESM-1_gn.nc"
+
+    [inputs.siconc]
+    # === Define variable name & filepath of sea ice concentration (siconc) === #
+    name = "siconc"
+    filepath = "{data_dir}/siconc/gn/v*/siconc_SImon_EC-Earth3-ESM-1_esm-hist_r1i1p1f1_gn_*.nc"
+
+    [inputs.sivol]
+    # === Define variable name & filepath of sea ice volume (thickness) (sivol) === #
+    name = "sivol"
+    filepath = "{data_dir}/sivol/gn/v*/sivol_SImon_EC-Earth3-ESM-1_esm-hist_r1i1p1f1_gn_*.nc"
 
     [inputs.simass]
     # === Define variable name & filepath of sea ice mass (simass) === #
@@ -73,6 +83,6 @@ data_dir = "/g100_work/optim_IAC/research/noc/otooth/OptimESM/data/EC-Earth3-ESM
 [outputs]
 # Define Sea Ice Mass Budget Analysis netCDF output file:
 output_dir = "/g100_work/optim_IAC/research/noc/otooth/OptimESM/WP5/SeaIceMassBudgetMIP/contributions/EC-Earth3-ESM1/outputs/"
-# output_name = "EC-Earth3-ESM1_SIMBA_NH_esm-hist_r1i1p1f1"
-output_name = "EC-Earth3-ESM1_SIMBA_SH_esm-hist_r1i1p1f1"
+output_name = "EC-Earth3-ESM1_SIMBA_NH_esm-hist_r1i1p1f1"
+# output_name = "EC-Earth3-ESM1_SIMBA_SH_esm-hist_r1i1p1f1"
 date_format = "M"

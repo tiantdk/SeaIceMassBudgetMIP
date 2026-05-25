@@ -15,7 +15,7 @@ set -euo pipefail
 # ==== Input arguments to SIMBA ==== #
 # Define config file & log file paths:
 config_file=./configs/EC-Earth3-ESM1_esm-up2p0_config.toml
-log_file=./logs/EC-Earth3-ESM1_simba.log
+log_file=./logs/EC-Earth3-ESM1_v1_simba.log
 
 # Run multiple pipelines:
 l_multi=false
