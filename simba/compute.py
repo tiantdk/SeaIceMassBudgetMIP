@@ -19,11 +19,11 @@ def _compute_area_sum(
         var: str,
     ) -> xr.DataArray:
     """
-    Compute masked sum of the product of a variable and horizontal grid cell area
+    Compute masked sum of the produce of a variable and horizontal grid cell area
     (`areacello`).
 
     Horizontal dimensions are assumed to be named 'i' and 'j'
-     
+
     `mask` is applied as a boolean mask, where True = included | False = excluded.
 
     Parameters:
@@ -81,30 +81,32 @@ def compute_sea_ice_mass_budget(
     if not isinstance(ds, xr.Dataset):
         raise TypeError("input dataset must be an xarray Dataset.")
 
-    # === Compute Sea Ice Mass Budget == #
-    # --> Total Sea Ice Mass <-- #
-    simass_total = _compute_area_sum(ds=ds, var="simass")
-    # Define Sea Ice Mass Budget output dataset:
-    ds_simba = simass_total.to_dataset(name="simass_total")
-
-    # Add CF-compliant attributes:
-    ds_simba["simass_total"].attrs = ds["simass"].attrs.copy()
-    # Drop legacy attributes:
-    for key in ["cell_measures", "_FillValue", "coordinates", "original_name"]:
-        ds_simba["simass_total"].attrs.pop(key, None)
-
+    # Initialise empty Dataset:
+    ds_simba = xr.Dataset()
     # Define history CF-attribute:
     timestamp = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
     history_str = f"{timestamp} Computed using SIMBA (Sea Ice Mass Budget Analysis) version {__version__}."
 
-    # Update CF attributes:
-    ds_simba["simass_total"].attrs.update({
-        "units": "kg",
-        "long_name": "Total Sea-Ice Mass Over Masked Region",
-        "cell_methods": f"area: sum where {mask_name} time: mean",
-        "comment": "Total sea ice mass multiplied by grid-cell area over the masked region.",
-        "history": history_str
-    })
+    # === Compute Sea Ice Mass Budget == #
+    # --> Total Sea Ice Mass <-- #
+    if "simass" in ds.data_vars:
+        # Define Sea Ice Mass Budget output dataset:
+        ds_simba["simass_total"] = _compute_area_sum(ds=ds, var="simass")
+
+        # Add CF-compliant attributes:
+        ds_simba["simass_total"].attrs = ds["simass"].attrs.copy()
+        # Drop legacy attributes:
+        for key in ["cell_measures", "_FillValue", "coordinates", "original_name"]:
+            ds_simba["simass_total"].attrs.pop(key, None)
+
+        # Update CF attributes:
+        ds_simba["simass_total"].attrs.update({
+            "units": "kg",
+            "long_name": "Total Sea-Ice Mass Over Masked Region",
+            "cell_methods": f"area: sum where {mask_name} time: mean",
+            "comment": "Total sea ice mass multiplied by grid-cell area over the masked region.",
+            "history": history_str
+        })
 
     # --> Total Sea Ice Area <-- #
     if "siconc" in ds.data_vars:
@@ -163,5 +165,8 @@ def compute_sea_ice_mass_budget(
             "comment": f"{ds[var].attrs.get('comment', var).replace('divided by grid-cell area', 'multiplied by grid-cell area')}",
             "history": history_str
         })
+
+    # Update global output attributes using final input dataset:
+    ds_simba.attrs = ds.attrs.copy()
 
     return ds_simba
