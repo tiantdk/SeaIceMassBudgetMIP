@@ -14,17 +14,17 @@ set -euo pipefail
 
 # ==== Input arguments to SIMBA ==== #
 # Define config file & log file paths:
-config_file=./configs/UKESM1-2-LL_esm-up2p0-gwl-dn_config.toml
-log_file=./logs/UKESM1-2-LL_esm-up2p0-gwl-dn_simba.log
+config_file=./configs/UKESM1-2-LL_esm-up2p0_config.toml
+log_file=./logs/UKESM1-2-LL_esm-up2p0_simba.log
 
 # Run multiple pipelines:
-l_multi=true
+l_multi=false
 
 # Define Experiment IDs [l_multi=true] -> esm-up2p0-gwl
 # exp_ids=("esm-up2p0-gwl2p0" "esm-up2p0-gwl3p0" "esm-up2p0-gwl4p0")
 
 # Define Experiment IDs [l_multi=true] -> esm-up2p0-gwl-dn
-# exp_ids=("esm-up2p0-gwl2p0-50y-dn1p0" "esm-up2p0-gwl2p0-50y-dn2p0" "esm-up2p0-gwl3p0-50y-dn2p0" "esm-up2p0-gwl4p0-50y-dn2p0" "esm-up2p0-gwl4p0-50y-dn2p0-gwl2p0")
+# exp_ids=("esm-up2p0-gwl2p0-50y-dn1p0" "esm-up2p0-gwl2p0-50y-dn2p0" "esm-up2p0-gwl3p0-50y-dn2p0" "esm-up2p0-gwl4p0-50y-dn2p0")
 exp_ids=("esm-up2p0-gwl4p0-50y-dn1p0")
 
 # ================================== #

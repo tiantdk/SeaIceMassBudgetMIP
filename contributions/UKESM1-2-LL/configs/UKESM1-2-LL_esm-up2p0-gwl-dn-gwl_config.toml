@@ -8,7 +8,7 @@ dimensions = { time = "time", i = "i", j = "j"}
 # === Define data directory === #
 # Data directory for all input datasets to be optionally substituted in filepaths below:
 # (i.e., any instance of "{data_dir}" in filepaths below will be replaced with the value specified here).
-data_dir = "/home/users/o_tooth/NOC/OptimESM/JASMIN/data/UKESM1-2-LL/esm-piControl/r1i1p1f1/SImon/"
+data_dir = "/home/users/o_tooth/NOC/OptimESM/JASMIN/data/UKESM1-2-LL/esm-up2p0-gwl4p0-50y-dn2p0-gwl2p0/r1i1p1f1/SImon/"
 
     [inputs.mask]
     # === Define variable name & filepath of regional mask to perform sea ice mass budget === #
@@ -23,66 +23,66 @@ data_dir = "/home/users/o_tooth/NOC/OptimESM/JASMIN/data/UKESM1-2-LL/esm-piContr
     [inputs.siconc]
     # === Define variable name & filepath of sea ice concentration (siconc) === #
     name = "siconc"
-    filepath = "{data_dir}/siconc/gn/v*/siconc_SImon_UKESM1-2-LL_esm-piControl_r1i1p1f1_gn*.nc"
+    filepath = "{data_dir}/siconc/gn/v*/siconc_SImon_UKESM1-2-LL_esm-up2p0-gwl4p0-50y-dn2p0-gwl2p0_r1i1p1f1_gn*.nc"
 
     [inputs.sivol]
     # === Define variable name & filepath of sea ice volume (thickness) (sivol) === #
     name = "sivol"
-    filepath = "{data_dir}/sivol/gn/v*/sivol_SImon_UKESM1-2-LL_esm-piControl_r1i1p1f1_gn*.nc"
+    filepath = "{data_dir}/sivol/gn/v*/sivol_SImon_UKESM1-2-LL_esm-up2p0-gwl4p0-50y-dn2p0-gwl2p0_r1i1p1f1_gn*.nc"
 
     [inputs.simass]
     # === Define variable name & filepath of sea ice mass (simass) === #
     name = "simass"
-    filepath = "{data_dir}/simass/gn/v*/simass_SImon_UKESM1-2-LL_esm-piControl_r1i1p1f1_gn*.nc"
+    filepath = "{data_dir}/simass/gn/v*/simass_SImon_UKESM1-2-LL_esm-up2p0-gwl4p0-50y-dn2p0-gwl2p0_r1i1p1f1_gn*.nc"
 
     [inputs.sidmassth]
     # === Define variable name & filepath of sea ice mass change from thermodynamics (sidmassth) === #
     name = "sidmassth"
-    filepath = "{data_dir}/sidmassth/gn/v*/sidmassth_SImon_UKESM1-2-LL_esm-piControl_r1i1p1f1_gn*.nc"
+    filepath = "{data_dir}/sidmassth/gn/v*/sidmassth_SImon_UKESM1-2-LL_esm-up2p0-gwl4p0-50y-dn2p0-gwl2p0_r1i1p1f1_gn*.nc"
 
     [inputs.sidmassdyn]
     # === Define variable name & filepath of sea ice mass change from dynamics (sidmassdyn) === #
     name = "sidmassdyn"
-    filepath = "{data_dir}/sidmassdyn/gn/v*/sidmassdyn_SImon_UKESM1-2-LL_esm-piControl_r1i1p1f1_gn*.nc"
+    filepath = "{data_dir}/sidmassdyn/gn/v*/sidmassdyn_SImon_UKESM1-2-LL_esm-up2p0-gwl4p0-50y-dn2p0-gwl2p0_r1i1p1f1_gn*.nc"
 
     [inputs.sidmassgrowthwat]
     # === Define variable name & filepath of sea ice mass change through growth in supercooled open water (a.k.a. frazil) (sidmassgrowthwat) === #
     name = "sidmassgrowthwat"
-    filepath = "{data_dir}/sidmassgrowthwat/gn/v*/sidmassgrowthwat_SImon_UKESM1-2-LL_esm-piControl_r1i1p1f1_gn*.nc"
+    filepath = "{data_dir}/sidmassgrowthwat/gn/v*/sidmassgrowthwat_SImon_UKESM1-2-LL_esm-up2p0-gwl4p0-50y-dn2p0-gwl2p0_r1i1p1f1_gn*.nc"
 
     [inputs.sidmassgrowthbot]
     # === Define variable name & filepath of sea ice mass change through basal growth (sidmassgrowthbot) === #
     name = "sidmassgrowthbot"
-    filepath = "{data_dir}/sidmassgrowthbot/gn/v*/sidmassgrowthbot_SImon_UKESM1-2-LL_esm-piControl_r1i1p1f1_gn*.nc"
+    filepath = "{data_dir}/sidmassgrowthbot/gn/v*/sidmassgrowthbot_SImon_UKESM1-2-LL_esm-up2p0-gwl4p0-50y-dn2p0-gwl2p0_r1i1p1f1_gn*.nc"
 
     [inputs.sidmasssi]
     # === Define variable name & filepath of sea ice mass change through snow-to-ice conversion (sidmasssi) === #
     name = "sidmasssi"
-    filepath = "{data_dir}/sidmasssi/gn/v*/sidmasssi_SImon_UKESM1-2-LL_esm-piControl_r1i1p1f1_gn*.nc"
+    filepath = "{data_dir}/sidmasssi/gn/v*/sidmasssi_SImon_UKESM1-2-LL_esm-up2p0-gwl4p0-50y-dn2p0-gwl2p0_r1i1p1f1_gn*.nc"
 
     [inputs.sidmassevapsubl]
     # === Define variable name & filepath of sea ice mass change through evaporation and sublimation (sidmassevapsubl) === #
     name = "sidmassevapsubl"
-    filepath = "{data_dir}/sidmassevapsubl/gn/v*/sidmassevapsubl_SImon_UKESM1-2-LL_esm-piControl_r1i1p1f1_gn*.nc"
+    filepath = "{data_dir}/sidmassevapsubl/gn/v*/sidmassevapsubl_SImon_UKESM1-2-LL_esm-up2p0-gwl4p0-50y-dn2p0-gwl2p0_r1i1p1f1_gn*.nc"
 
     [inputs.sidmassmelttop]
     # === Define variable name & filepath of sea ice mass change through surface melting (sidmassmelttop) === #
     name = "sidmassmelttop"
-    filepath = "{data_dir}/sidmassmelttop/gn/v*/sidmassmelttop_SImon_UKESM1-2-LL_esm-piControl_r1i1p1f1_gn*.nc"
+    filepath = "{data_dir}/sidmassmelttop/gn/v*/sidmassmelttop_SImon_UKESM1-2-LL_esm-up2p0-gwl4p0-50y-dn2p0-gwl2p0_r1i1p1f1_gn*.nc"
 
     [inputs.sidmassmeltbot]
     # === Define variable name & filepath of sea ice mass change through bottom melting (sidmassmeltbot) === #
     name = "sidmassmeltbot"
-    filepath = "{data_dir}/sidmassmeltbot/gn/v*/sidmassmeltbot_SImon_UKESM1-2-LL_esm-piControl_r1i1p1f1_gn*.nc"
+    filepath = "{data_dir}/sidmassmeltbot/gn/v*/sidmassmeltbot_SImon_UKESM1-2-LL_esm-up2p0-gwl4p0-50y-dn2p0-gwl2p0_r1i1p1f1_gn*.nc"
 
     [inputs.sidmasslat]
     # === Define variable name & filepath of sea ice mass change through lateral melting (sidmasslat) === #
     name = "sidmasslat"
-    filepath = "{data_dir}/sidmasslat/gn/v*/sidmasslat_SImon_UKESM1-2-LL_esm-piControl_r1i1p1f1_gn*.nc"
+    filepath = "{data_dir}/sidmasslat/gn/v*/sidmasslat_SImon_UKESM1-2-LL_esm-up2p0-gwl4p0-50y-dn2p0-gwl2p0_r1i1p1f1_gn*.nc"
 
 [outputs]
 # Define Sea Ice Mass Budget Analysis netCDF output file:
 output_dir = "/home/users/o_tooth/NOC/OptimESM/SeaIceMassBudgetMIP/contributions/UKESM1-2-LL/outputs/"
-# output_name = "UKESM1-2-LL_SIMBA_NH_esm-piControl_r1i1p1f1"
-output_name = "UKESM1-2-LL_SIMBA_SH_esm-piControl_r1i1p1f1"
+# output_name = "UKESM1-2-LL_SIMBA_NH_esm-up2p0-gwl4p0-50y-dn2p0-gwl2p0_r1i1p1f1"
+output_name = "UKESM1-2-LL_SIMBA_SH_esm-up2p0-gwl4p0-50y-dn2p0-gwl2p0_r1i1p1f1"
 date_format = "M"

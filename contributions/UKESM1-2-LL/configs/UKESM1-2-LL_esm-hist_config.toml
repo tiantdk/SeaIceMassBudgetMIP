@@ -12,13 +12,23 @@ data_dir = "/home/users/o_tooth/NOC/OptimESM/JASMIN/data/UKESM1-2-LL/esm-hist/r1
 
     [inputs.mask]
     # === Define variable name & filepath of regional mask to perform sea ice mass budget === #
-    name = "mask_NH"
+    name = "mask_SH"
     filepath = "/home/users/o_tooth/NOC/OptimESM/JASMIN/data/UKESM1-2-LL/Ofx/hemisphere_masks_Ofx_UKESM1-2-LL.nc"
 
     [inputs.areacello]
     # === Define variable name & filepath of horizontal grid cell area (areacello) === #
     name = "areacello"
     filepath = "/home/users/o_tooth/NOC/OptimESM/JASMIN/data/UKESM1-2-LL/Ofx/areacello_Ofx_UKESM1-0-LL_piControl_r1i1p1f2_gn.nc"
+
+    [inputs.siconc]
+    # === Define variable name & filepath of sea ice concentration (siconc) === #
+    name = "siconc"
+    filepath = "{data_dir}/siconc/gn/v*/siconc_SImon_UKESM1-2-LL_esm-hist_r1i1p1f1_gn*.nc"
+
+    [inputs.sivol]
+    # === Define variable name & filepath of sea ice volume (thickness) (sivol) === #
+    name = "sivol"
+    filepath = "{data_dir}/sivol/gn/v*/sivol_SImon_UKESM1-2-LL_esm-hist_r1i1p1f1_gn*.nc"
 
     [inputs.simass]
     # === Define variable name & filepath of sea ice mass (simass) === #
@@ -73,6 +83,6 @@ data_dir = "/home/users/o_tooth/NOC/OptimESM/JASMIN/data/UKESM1-2-LL/esm-hist/r1
 [outputs]
 # Define Sea Ice Mass Budget Analysis netCDF output file:
 output_dir = "/home/users/o_tooth/NOC/OptimESM/SeaIceMassBudgetMIP/contributions/UKESM1-2-LL/outputs/"
-output_name = "UKESM1-2-LL_SIMBA_NH_esm-hist_r1i1p1f1"
-# output_name = "UKESM1-2-LL_SIMBA_SH_esm-hist_r1i1p1f1"
+# output_name = "UKESM1-2-LL_SIMBA_NH_esm-hist_r1i1p1f1"
+output_name = "UKESM1-2-LL_SIMBA_SH_esm-hist_r1i1p1f1"
 date_format = "M"
