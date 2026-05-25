@@ -1,0 +1,88 @@
+[inputs]
+# === Define dimensions in dictionary format === #
+# (i.e., { time = "time_counter", i = "x", j = "y"} where the
+# key is the standard CMORISED dimension name and the value is the
+# corresponding dimension name in all input datasets).
+dimensions = { time = "time", i = "i", j = "j"}
+
+# === Define data directory === #
+# Data directory for all input datasets to be optionally substituted in filepaths below:
+# (i.e., any instance of "{data_dir}" in filepaths below will be replaced with the value specified here).
+data_dir = "/g100_work/optim_IAC/research/noc/otooth/OptimESM/data/IPSL-CM6-ESMCO2/esm-up2p0/r1i1p3f1/SImon"
+
+    [inputs.mask]
+    # === Define variable name & filepath of regional mask to perform sea ice mass budget === #
+    name = "mask_SH"
+    filepath = "/g100_work/optim_IAC/research/noc/otooth/OptimESM/data/IPSL-CM6-ESMCO2/Ofx/hemisphere_masks_Ofx_IPSL-CM6-ESMCO2.nc"
+
+    [inputs.areacello]
+    # === Define variable name & filepath of horizontal grid cell area (areacello) === #
+    name = "areacello"
+    filepath = "/g100_work/optim_IAC/research/noc/otooth/OptimESM/data/IPSL-CM6-ESMCO2/Ofx/areacello_Ofx_IPSL-CM6-ESMCO2_gn.nc"
+
+    [inputs.siconc]
+    # === Define variable name & filepath of sea ice concentration (siconc) === #
+    name = "siconc"
+    filepath = "{data_dir}/siconc/gn/v*/siconc_SImon_IPSL-CM6-ESMCO2_esm-up2p0_r1i1p3f1_gn_*.nc"
+
+    [inputs.sivol]
+    # === Define variable name & filepath of sea ice volume (thickness) (sivol) === #
+    name = "sivol"
+    filepath = "{data_dir}/sivol/gn/v*/sivol_SImon_IPSL-CM6-ESMCO2_esm-up2p0_r1i1p3f1_gn_*.nc"
+
+    # [inputs.simass]
+    # === Define variable name & filepath of sea ice mass (simass) === #
+    # name = "simass"
+    # filepath = "{data_dir}/simass/gn/v*/simass_SImon_IPSL-CM6-ESMCO2_esm-up2p0_r1i1p3f1_gn_*.nc"
+
+    # [inputs.sidmassth]
+    # === Define variable name & filepath of sea ice mass change from thermodynamics (sidmassth) === #
+    # name = "sidmassth"
+    # filepath = "{data_dir}/sidmassth/gn/v*/sidmassth_SImon_IPSL-CM6-ESMCO2_esm-up2p0_r1i1p3f1_gn_*.nc"
+
+    # [inputs.sidmassdyn]
+    # === Define variable name & filepath of sea ice mass change from dynamics (sidmassdyn) === #
+    # name = "sidmassdyn"
+    # filepath = "{data_dir}/sidmassdyn/gn/v*/sidmassdyn_SImon_IPSL-CM6-ESMCO2_esm-up2p0_r1i1p3f1_gn_*.nc"
+
+    # [inputs.sidmassgrowthwat]
+    # === Define variable name & filepath of sea ice mass change through growth in supercooled open water (a.k.a. frazil) (sidmassgrowthwat) === #
+    # name = "sidmassgrowthwat"
+    # filepath = "{data_dir}/sidmassgrowthwat/gn/v*/sidmassgrowthwat_SImon_IPSL-CM6-ESMCO2_esm-up2p0_r1i1p3f1_gn_*.nc"
+
+    # [inputs.sidmassgrowthbot]
+    # === Define variable name & filepath of sea ice mass change through basal growth (sidmassgrowthbot) === #
+    # name = "sidmassgrowthbot"
+    # filepath = "{data_dir}/sidmassgrowthbot/gn/v*/sidmassgrowthbot_SImon_IPSL-CM6-ESMCO2_esm-up2p0_r1i1p3f1_gn_*.nc"
+
+    # [inputs.sidmasssi]
+    # === Define variable name & filepath of sea ice mass change through snow-to-ice conversion (sidmasssi) === #
+    # name = "sidmasssi"
+    # filepath = "{data_dir}/sidmasssi/gn/v*/sidmasssi_SImon_IPSL-CM6-ESMCO2_esm-up2p0_r1i1p3f1_gn_*.nc"
+
+    # [inputs.sidmassevapsubl]
+    # === Define variable name & filepath of sea ice mass change through evaporation and sublimation (sidmassevapsubl) === #
+    # name = "sidmassevapsubl"
+    # filepath = "{data_dir}/sidmassevapsubl/gn/v*/sidmassevapsubl_SImon_IPSL-CM6-ESMCO2_esm-up2p0_r1i1p3f1_gn_*.nc"
+
+    # [inputs.sidmassmelttop]
+    # === Define variable name & filepath of sea ice mass change through surface melting (sidmassmelttop) === #
+    # name = "sidmassmelttop"
+    # filepath = "{data_dir}/sidmassmelttop/gn/v*/sidmassmelttop_SImon_IPSL-CM6-ESMCO2_esm-up2p0_r1i1p3f1_gn_*.nc"
+
+    # [inputs.sidmassmeltbot]
+    # === Define variable name & filepath of sea ice mass change through bottom melting (sidmassmeltbot) === #
+    # name = "sidmassmeltbot"
+    # filepath = "{data_dir}/sidmassmeltbot/gn/v*/sidmassmeltbot_SImon_IPSL-CM6-ESMCO2_esm-up2p0_r1i1p3f1_gn_*.nc"
+
+    # [inputs.sidmasslat]
+    # === Define variable name & filepath of sea ice mass change through lateral melting (sidmasslat) === #
+    # name = "sidmasslat"
+    # filepath = "{data_dir}/sidmasslat/gn/v*/sidmasslat_SImon_IPSL-CM6-ESMCO2_esm-up2p0_r1i1p3f1_gn_*.nc"
+
+[outputs]
+# Define Sea Ice Mass Budget Analysis netCDF output file:
+output_dir = "/g100_work/optim_IAC/research/noc/otooth/OptimESM/WP5/SeaIceMassBudgetMIP/contributions/IPSL-CM6-ESMCO2/outputs/"
+# output_name = "IPSL-CM6-ESMCO2_SIMBA_NH_esm-up2p0_r1i1p3f1"
+output_name = "IPSL-CM6-ESMCO2_SIMBA_SH_esm-up2p0_r1i1p3f1"
+date_format = "M"
